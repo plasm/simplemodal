@@ -1,0 +1,9 @@
+name: Modal
+author: plasm
+category: Interface
+tags: [overlay,modal]
+current: 1.0
+copyright: "&copy; [Marco Dell'Anna](http://www.plasm.it)"
+
+sources:
+  - "Source/simple-modal.js"
