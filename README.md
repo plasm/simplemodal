@@ -11,8 +11,11 @@ SIMPLE MODAL is not a lightbox although the possibility to hide parts of its lay
 How to use
 ----------
 
+Minimal configuration
+
+
 ALERT INTEGRATION 
-----------
+-----------------
 Snippet code Javascript:
 
 	#JS
@@ -33,7 +36,7 @@ Snippet code HTML:
 
 
 MODAL-AJAX INTEGRATION
-----------
+----------------------
 Snippet code Javascript:
 
 	#JS
