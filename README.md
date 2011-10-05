@@ -1,5 +1,7 @@
 ![Screenshot](https://raw.github.com/plasm/simplemodal/master/logotipo.png)
 
+http://simplemodal.plasm.it
+---------------------------
 Modal - A simple modal window
 ===========================================
 SIMPLE MODAL is a small plugin to create modal windows.

@@ -4,6 +4,7 @@ category: Interface
 tags: [overlay,modal,interface]
 current: 1.0
 copyright: "&copy; [Marco Dell'Anna](http://www.plasm.it)"
+url: "http://simplemodal.plasm.it"
 
 sources:
   - "Source/simple-modal.js"
