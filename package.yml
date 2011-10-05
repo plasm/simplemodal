@@ -1,7 +1,7 @@
-name: Modal
+name: SimpleModal
 author: plasm
 category: Interface
-tags: [overlay,modal]
+tags: [overlay,modal,interface]
 current: 1.0
 copyright: "&copy; [Marco Dell'Anna](http://www.plasm.it)"
 

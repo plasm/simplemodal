@@ -1,0 +1,100 @@
+/*
+* Mootools Simple Modal
+* Version 1.0
+* Copyright (c) 2011 Marco Dell'Anna - http://www.plasm.it
+*/
+body{
+	font-family: 'Helvetica', Arial, serif;
+  font-size: 12px;
+	padding-bottom:20px;
+}
+a{
+	color:#666;
+	text-decoration:none;
+}
+/* Header */
+.header {
+  position: relative;
+  background: #dce0ed;
+  display: block;
+  height: 220px;
+  text-align: center;
+}
+.header .window {
+  position: relative;
+  display: block;
+  width: 125px;
+  height: 131px;
+	padding:32px 0 0;
+	margin:0 auto;
+  background: transparent url("../images/simpleModalSmallWhite.png") no-repeat center center;
+}
+/*Wrapper*/
+.wrapper{
+	display:block;
+	width:960px;
+	margin:0 auto;
+}
+.simple-modal-title{
+  position: relative;
+  display: block;
+  width: 200px;
+  height: 35px;
+	padding:4px 0 0;
+	margin:0 auto;
+  background: transparent url("../images/demo.png") no-repeat center center;
+}
+
+/* Examples */
+.example-item {
+  position: relative;
+  background: #FFFFFF;
+  float:left;
+	margin:20px 10px 0 10px;
+  width: 218px;
+  height: 198px;
+  border: 1px solid #d9cfd8;
+  text-align: center;
+  cursor: pointer;
+}
+.example-item img {
+  margin: 11px;
+  border: 1px solid #dce0ed;
+  width: 196px;
+  height: 147px;
+  line-height: 147px;
+  cursor: pointer;
+}
+.example-item a,
+.example-item a:link,
+.example-item a:visited,
+.example-item a:active {
+  width: 218px;
+  bottom: 10px;
+  font-family: 'Helvetica', Arial, serif;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  color: #8188a0;
+}
+.example-item a:hover {
+  color: #444;
+}
+
+p.credits{
+  display:block;
+	padding:20px 0 10px 0;
+	text-align:center;
+	font-size:11px;
+	color:#AAA;
+}
+.clear{
+	clear:both;
+}
+.align-left{
+  text-align:left !important;
+}
+.align-right{
+  text-align:right !important;
+}
