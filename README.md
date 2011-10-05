@@ -8,7 +8,7 @@ SIMPLE MODAL is a small plugin to create modal windows.
 It can be used to generate alert or confirm messages with few lines of code. Confirm configuration involves the use of callbacks to be applied to affirmative action; it can work in asynchronous mode and retrieve content from external pages or getting the inline content.
 SIMPLE MODAL is not a lightbox although the possibility to hide parts of its layout may partially make it similar.
 
-How to use
+How to Use
 ----------
 
 Minimal configuration
