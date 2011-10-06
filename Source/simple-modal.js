@@ -58,6 +58,7 @@ var SimpleModal = new Class({
         overlayColor:  "#000000",
         width:         400,
         draggable:     true,
+        keyEsc:        true,
         overlayClick:  true,
         closeButton:   true, // X close button
         hideHeader:    false, 
@@ -104,11 +105,15 @@ var SimpleModal = new Class({
           this.addButton(this.options.btn_cancel, "btn secondary");
 					// Rendering
 					var node = this._drawWindow(options);
+					// Add Esc Behaviour
+					this._addEscBehaviour();
         break;
         // Require title && contents (define the action buttons externally)
         case "modal":
 					// Rendering
 					var node = this._drawWindow(options);
+					// Add Esc Behaviour
+					this._addEscBehaviour();
         break;
         // Require title && url contents (define the action buttons externally)
         case "modal-ajax":
@@ -126,6 +131,8 @@ var SimpleModal = new Class({
           this.addButton(this.options.btn_ok, "btn primary");
 					// Rendering
 					var node = this._drawWindow(options);
+					// Add Esc Behaviour
+					this._addEscBehaviour();
         break;
       }
 			   
@@ -256,7 +263,10 @@ var SimpleModal = new Class({
            break;
            case 'hide':
                // Remove Event Resize
-               window.removeEvent("resize");
+               window.removeEvent("resize", this._display);
+               // Remove Event Resize
+               window.removeEvent("keydown", this._removeSM);
+               
                // Remove Overlay
                try{
                  $('simple-modal-overlay').destroy();
@@ -319,6 +329,8 @@ var SimpleModal = new Class({
 										// Inject
 										immagine.inject( $('simple-modal').getElement(".contents").empty() ).fade("hide").fade("in");
 		                this._display();
+		                // Add Esc Behaviour
+  									this._addEscBehaviour();
 									}.bind(this));
 									// Left
 									var myFx3 = new Fx.Tween($("simple-modal"), {
@@ -347,6 +359,8 @@ var SimpleModal = new Class({
 	            eval(responseJavaScript)
 	            // Resize
 	            this._display();
+	            // Add Esc Behaviour
+							this._addEscBehaviour();
 	          }.bind(this),
 	          onFailure: function(){
 	            $('simple-modal').removeClass("loading");
@@ -378,6 +392,20 @@ var SimpleModal = new Class({
         });
       } catch(err){}
  		  return;
+     },
+     
+     /**
+     * private method _addEscBehaviour
+     * add Event ESC
+     * @return
+     */
+     _addEscBehaviour: function(){
+       if(this.options.keyEsc){
+         this._removeSM = function(e){
+           if( e.key == "esc" ) this.hide();
+         }.bind(this)
+         window.addEvent('keydown', this._removeSM );
+  		  }
      },
       
     /**
