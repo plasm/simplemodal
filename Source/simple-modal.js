@@ -187,6 +187,8 @@ var SimpleModal = new Class({
 		      this._injectAllButtons();
 		      // Callback append
 		      this.options.onAppend();
+		      // Fade in
+			  node.fade("hide").fade(1);
 			return node;
 		},
 
