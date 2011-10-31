@@ -265,7 +265,10 @@ var SimpleModal = new Class({
                // Remove Event Resize
                window.removeEvent("resize", this._display);
                // Remove Event Resize
-               window.removeEvent("keydown", this._removeSM);
+               if(this.options.keyEsc){
+                 var fixEV = Browser.name != 'ie' ? "keydown" : "onkeydown";
+                 window.removeEvent(fixEV, this._removeSM);
+               }
                
                // Remove Overlay
                try{
@@ -404,7 +407,11 @@ var SimpleModal = new Class({
          this._removeSM = function(e){
            if( e.key == "esc" ) this.hide();
          }.bind(this)
-         window.addEvent('keydown', this._removeSM );
+          // Remove Event Resize
+         if(this.options.keyEsc){
+           var fixEV = Browser.name != 'ie' ? "keydown" : "onkeydown";
+           window.addEvent(fixEV, this._removeSM );
+         }
   		  }
      },
       
