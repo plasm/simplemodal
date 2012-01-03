@@ -75,7 +75,11 @@ window.addEvent("domready", function(e){
   /* Modal Image */
   $("modal-image").addEvent("click", function(e){
     e.stop();
-    var SM = new SimpleModal();
+    var SM = new SimpleModal({
+          "onAppend":function(){
+            $("simple-modal").fade("hide").fade("in")
+          }
+        });
         SM.show({
           "model":"modal-ajax",
 					"title":"Modal Lightbox",

@@ -356,8 +356,8 @@ var SimpleModal = new Class({
 	          },
 	          onSuccess: function(responseTree, responseElements, responseHTML, responseJavaScript){
 	            $('simple-modal').removeClass("loading");
-	            param.onRequestComplete();
 	            $('simple-modal').getElement(".contents").set("html", responseHTML);
+	            param.onRequestComplete();
 	            // Execute script page loaded
 	            eval(responseJavaScript)
 	            // Resize
