@@ -60,6 +60,8 @@ var SimpleModal = new Class({
         draggable:     true,
         keyEsc:        true,
         overlayClick:  true,
+		modalId : 'simple-modal',
+		modalOverlayId: 'simple-modal-overlay',
         closeButton:   true, // X close button
         hideHeader:    false, 
         hideFooter:    false,
@@ -81,7 +83,7 @@ var SimpleModal = new Class({
         //set options
         this.setOptions(options);
     },
-    
+
     /**
     * public method show
     * Open Modal
@@ -178,7 +180,7 @@ var SimpleModal = new Class({
     */
 		_drawWindow:function(options){
 			// Add Node in DOM
-      var node = new Element("div#simple-modal", {"class":"simple-modal"});
+      var node = new Element("div#"+this.options.modalId, {"class":"simple-modal"});
           node.inject( $$("body")[0] );
 			// Set Contents
 			var html = this._template(this.options.template, {"_TITLE_":options.title || "Untitled", "_CONTENTS_":options.contents || ""});
@@ -215,8 +217,9 @@ var SimpleModal = new Class({
     * @return
     */
     _injectAllButtons: function(){
+		var $this = this;
       this.buttons.each( function(e, i){
-        e.inject( $("simple-modal").getElement(".simple-modal-footer") );
+        e.inject( $($this.options.modalId).getElement(".simple-modal-footer") );
       });
 		return;
     },
@@ -228,10 +231,10 @@ var SimpleModal = new Class({
     */
     _addCloseButton: function(){
       var b = new Element("a", {"class":"close", "href":"#", "html":"x"});
-          b.inject($("simple-modal"), "top");
+          b.inject($(this.options.modalId), "top");
           // Aggiunge bottome X Close
           b.addEvent("click", function(e){
-            if(e) e.stop();
+            if(e) e.preventDefault()
             this.hide();
           }.bind( this ))
       return b;
@@ -246,14 +249,14 @@ var SimpleModal = new Class({
        switch( status ) {
            case 'show':
                this._overlay('hide');
-               var overlay = new Element("div", {"id":"simple-modal-overlay"});
+               var overlay = new Element("div", {"id": this.options.modalOverlayId});
                    overlay.inject( $$("body")[0] );
                    overlay.setStyle("background-color", this.options.overlayColor);
                    overlay.fade("hide").fade(this.options.overlayOpacity);
                 // Behaviour
                 if( this.options.overlayClick){
                   overlay.addEvent("click", function(e){
-                    if(e) e.stop();
+                    if(e) e.preventDefault();
                     this.hide();
                   }.bind(this))
                 }
@@ -272,12 +275,12 @@ var SimpleModal = new Class({
                
                // Remove Overlay
                try{
-                 $('simple-modal-overlay').destroy();
+                 $(this.options.modalOverlayId).destroy();
                }
                catch(err){}
                // Remove Modal
                try{
-                 $('simple-modal').destroy();
+                 $(this.options.modalId).destroy();
                }
                catch(err){}
            break;
@@ -292,16 +295,17 @@ var SimpleModal = new Class({
     */
     _loadContents: function(param){
 			// Set Loading
-			$('simple-modal').addClass("loading");
+			$(this.options.modalId).addClass("loading");
 			// Match image file
 			var re = new RegExp( /([^\/\\]+)\.(jpg|png|gif)$/i );
 			if( param.url.match(re) ){
 				// Hide Header/Footer
-	      $('simple-modal').addClass("hide-footer");
+	      $(this.options.modalId).addClass("hide-footer");
 				// Remove All Event on Overlay
-				$("simple-modal-overlay").removeEvents(); // Prevent Abort
+				$(this.options.modalOverlayId).removeEvents(); // Prevent Abort
 				// Immagine
-				var images = [param.url];
+				var $this = this,
+					images = [param.url];
 				new Asset.images(images, {
 							onProgress: function(i) {
 								immagine = this;
@@ -309,19 +313,19 @@ var SimpleModal = new Class({
 							onComplete: function() {
 								try{
 									// Remove loading
-									$('simple-modal').removeClass("loading");
+									$($this.options.modalId).removeClass("loading");
 									// Imposta dimensioni
-									var content = $('simple-modal').getElement(".contents");
+									var content = $($this.options.modalId).getElement(".contents");
 									var padding = content.getStyle("padding").split(" ");
 									var width   = (immagine.get("width").toInt()) + (padding[1].toInt()+padding[3].toInt())
 									var height  = immagine.get("height").toInt();
 									// Width
-									var myFx1 = new Fx.Tween($("simple-modal"), {
+									var myFx1 = new Fx.Tween($($this.options.modalId), {
 									    duration: 'normal',
 									    transition: 'sine:out',
 									    link: 'cancel',
 									    property: 'width'
-									}).start($("simple-modal").getCoordinates().width, width);
+									}).start($($this.options.modalId).getCoordinates().width, width);
 									// Height
 									var myFx2 = new Fx.Tween(content, {
 									    duration: 'normal',
@@ -330,18 +334,18 @@ var SimpleModal = new Class({
 									    property: 'height'
 									}).start(content.getCoordinates().height, height).chain(function(){
 										// Inject
-										immagine.inject( $('simple-modal').getElement(".contents").empty() ).fade("hide").fade("in");
+										immagine.inject( $($this.options.modalId).getElement(".contents").empty() ).fade("hide").fade("in");
 		                this._display();
 		                // Add Esc Behaviour
   									this._addEscBehaviour();
 									}.bind(this));
 									// Left
-									var myFx3 = new Fx.Tween($("simple-modal"), {
+									var myFx3 = new Fx.Tween($($this.options.modalId), {
 									    duration: 'normal',
 									    transition: 'sine:out',
 									    link: 'cancel',
 									    property: 'left'
-									}).start($("simple-modal").getCoordinates().left, (window.getCoordinates().width - width)/2);
+									}).start($($this.options.modalId).getCoordinates().left, (window.getCoordinates().width - width)/2);
 								}catch(err){}
 							}.bind(this)
 						});
@@ -355,8 +359,8 @@ var SimpleModal = new Class({
 	          onRequest: function(){
 	          },
 	          onSuccess: function(responseTree, responseElements, responseHTML, responseJavaScript){
-	            $('simple-modal').removeClass("loading");
-	            $('simple-modal').getElement(".contents").set("html", responseHTML);
+	            $(this.options.modalId).removeClass("loading");
+	            $(this.options.modalId).getElement(".contents").set("html", responseHTML);
 	            param.onRequestComplete();
 	            // Execute script page loaded
 	            eval(responseJavaScript)
@@ -366,8 +370,8 @@ var SimpleModal = new Class({
 							this._addEscBehaviour();
 	          }.bind(this),
 	          onFailure: function(){
-	            $('simple-modal').removeClass("loading");
-	            $('simple-modal').getElement(".contents").set("html", "loading failed")
+	            $(this.options.modalId).removeClass("loading");
+	            $(this.options.modalId).getElement(".contents").set("html", "loading failed")
 	          }
 	      }).send();
 			}
@@ -381,7 +385,7 @@ var SimpleModal = new Class({
      _display: function(){
       // Update overlay
       try{
-        $("simple-modal-overlay").setStyles({
+        $(this.options.modalOverlayId).setStyles({
           height: window.getCoordinates().height //$$("body")[0].getScrollSize().y
         });
       } catch(err){}
@@ -389,9 +393,9 @@ var SimpleModal = new Class({
       // Update position popup
       try{
         var offsetTop = this.options.offsetTop || 40; //this.options.offsetTop != null ? this.options.offsetTop : window.getScroll().y + 40;
-        $("simple-modal").setStyles({
+        $(this.options.modalId).setStyles({
           top: offsetTop,
-          left: ((window.getCoordinates().width - $("simple-modal").getCoordinates().width)/2 )
+          left: ((window.getCoordinates().width - $(this.options.modalId).getCoordinates().width)/2 )
         });
       } catch(err){}
  		  return;
