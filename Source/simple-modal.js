@@ -234,7 +234,7 @@ var SimpleModal = new Class({
           b.inject($(this.options.modalId), "top");
           // Aggiunge bottome X Close
           b.addEvent("click", function(e){
-            if(e) e.stop();
+            if(e) e.preventDefault()
             this.hide();
           }.bind( this ))
       return b;
@@ -256,7 +256,7 @@ var SimpleModal = new Class({
                 // Behaviour
                 if( this.options.overlayClick){
                   overlay.addEvent("click", function(e){
-                    if(e) e.stop();
+                    if(e) e.preventDefault();
                     this.hide();
                   }.bind(this))
                 }
