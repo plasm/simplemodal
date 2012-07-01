@@ -53,7 +53,7 @@ var SimpleModal = new Class({
     // Options
     options: {
         onAppend:      Function, // callback inject in DOM
-        offsetTop:     null,
+        offsetTop:     40,
         overlayOpacity:.3,
         overlayColor:  "#000000",
         width:         400,
@@ -63,6 +63,8 @@ var SimpleModal = new Class({
         closeButton:   true, // X close button
         hideHeader:    false, 
         hideFooter:    false,
+        lightboxExcessWidth:40,  // Only for Modal Image (excess pixels created from skin)
+        lightboxExcessHeight:120, // Only for Modal Image (excess pixels created from skin)
         btn_ok:        "OK", // Label
         btn_cancel:    "Cancel", // Label
         template:"<div class=\"simple-modal-header\"> \
@@ -315,6 +317,11 @@ var SimpleModal = new Class({
 									var padding = content.getStyle("padding").split(" ");
 									var width   = (immagine.get("width").toInt()) + (padding[1].toInt()+padding[3].toInt())
 									var height  = immagine.get("height").toInt();
+									// Porportional scale
+                  var ns = this._scaleImage(width, height);
+                  width   = ns.width					
+									height  = ns.height
+									
 									// Width
 									var myFx1 = new Fx.Tween($("simple-modal"), {
 									    duration: 'normal',
@@ -330,7 +337,7 @@ var SimpleModal = new Class({
 									    property: 'height'
 									}).start(content.getCoordinates().height, height).chain(function(){
 										// Inject
-										immagine.inject( $('simple-modal').getElement(".contents").empty() ).fade("hide").fade("in");
+										immagine.inject( $('simple-modal').getElement(".contents").empty() ).fade("hide").setStyles({"width":width, "height":height}).fade("in");
 		                this._display();
 		                // Add Esc Behaviour
   									this._addEscBehaviour();
@@ -374,6 +381,27 @@ var SimpleModal = new Class({
     },
     
     /**
+    * private method _scaleImage
+    * Calculate scale image proportional
+    * @return {width, height}
+    */
+    _scaleImage: function(w, h){
+      var removeH = this.options.lightboxExcessHeight + this.options.offsetTop;
+      var removeW = this.options.lightboxExcessWidth;
+      var width  = w ;
+      var height = h ;
+      var newWidth  = window.getSize().x - removeW;
+      var newHeight = window.getSize().y - removeH;
+      ratio = (width <= height) ? height / newHeight : width / newWidth;
+			// Ratio
+			ratio      = Math.max(ratio, 1.0);
+			// New sizes
+			w = parseInt(width / ratio);
+			h = parseInt(height / ratio);
+			return {"width":w, "height":h}
+    },
+    
+    /**
     * private method _display
     * Move interface
     * @return
@@ -388,7 +416,7 @@ var SimpleModal = new Class({
          
       // Update position popup
       try{
-        var offsetTop = this.options.offsetTop || 40; //this.options.offsetTop != null ? this.options.offsetTop : window.getScroll().y + 40;
+        var offsetTop = this.options.offsetTop || 0; //this.options.offsetTop != null ? this.options.offsetTop : window.getScroll().y;
         $("simple-modal").setStyles({
           top: offsetTop,
           left: ((window.getCoordinates().width - $("simple-modal").getCoordinates().width)/2 )
