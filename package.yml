@@ -8,3 +8,5 @@ url: "http://simplemodal.plasm.it"
 
 sources:
   - "Source/simple-modal.js"
+  
+demo: http://simplemodal.plasm.it
