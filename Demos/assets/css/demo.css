@@ -12,6 +12,12 @@ a{
 	color:#666;
 	text-decoration:none;
 }
+h2{		    
+	font-size: 26px;
+	margin-left: 10px;
+	margin-top: 30px;	
+	text-shadow: 0px 0px 1px rgba(150, 150, 150, 1);
+}
 /* Header */
 .header {
   position: relative;
