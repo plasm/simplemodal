@@ -61,7 +61,7 @@ window.addEvent("domready", function(e){
 						}
         });
         // Aggiunge Bottone annulla
-        SM.addButton("Calcel", "btn");
+        SM.addButton("Cancel", "btn");
         SM.show({
           "model":"modal-ajax",
           "title":"Are you sure you want to delete this?",

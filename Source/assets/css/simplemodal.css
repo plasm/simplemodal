@@ -80,10 +80,9 @@
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 36px;
 }
-.simple-modal a.close {
+.simple-modal a.close, .simple-modal a.previous-image, .simple-modal a.next-image {
   position: absolute;
-  right: 15px;
-  top: 15px;
+  top: 16px;  
   color: #999;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 17px;
@@ -91,7 +90,16 @@
   line-height: 10px;
   text-decoration: none;
 }
-.simple-modal a.close:hover {
+.simple-modal a.close {
+  right: 15px;
+}
+.simple-modal a.previous-image {
+  right: 80px;  
+}
+.simple-modal a.next-image {
+  right: 60px;
+}
+.simple-modal a.close:hover, .simple-modal a.previous-image:hover, .simple-modal a.next-image:hover {
   color: #444;
 }
 .simple-modal .simple-modal-body {
