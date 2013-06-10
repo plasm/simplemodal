@@ -501,8 +501,8 @@ var SimpleModal = new Class({
 		}
 		
 		return;
-    },
-
+    },	
+    
     /**
     * private method _loadContents
     * Async request for modal ajax
@@ -535,15 +535,15 @@ var SimpleModal = new Class({
 						$('simple-modal').removeClass("loading");
 					
 						// Imposta dimensioni
-						var content = $('simple-modal').getElement(".contents");
-						var padding = content.getStyle("padding").split(" ");
-						var width   = (immagine.get("width").toInt()) + (padding[1].toInt()+padding[3].toInt())
+						var content = $('simple-modal').getElement(".simple-modal-body");
+						var padding = content.getStyle("padding").split(" ");								
+						var width   = immagine.get("width").toInt();
 						var height  = immagine.get("height").toInt();
 					
 						// Porportional scale
 						var ns = this._scaleImage(width, height);
 						width   = ns.width					
-						height  = ns.height
+						height  = ns.height												
 						
 						// Width
 						var myFx1 = new Fx.Tween($("simple-modal"), {
@@ -551,7 +551,7 @@ var SimpleModal = new Class({
 							transition: 'sine:out',
 							link: 'cancel',
 							property: 'width'
-						}).start($("simple-modal").getCoordinates().width, width);
+						}).start($("simple-modal").getCoordinates().width, width + padding[1].toInt() + padding[3].toInt() + $('simple-modal').getStyle('border-left-width').toInt() + $('simple-modal').getStyle('border-right-width').toInt())
 						
 						// Height
 						var myFx2 = new Fx.Tween(content, {
@@ -639,7 +639,7 @@ var SimpleModal = new Class({
 		
 		// New sizes
 		w = parseInt(width / ratio);
-		h = parseInt(height / ratio);
+		h = parseInt(height / ratio);		
 		return {"width":w, "height":h}
     },
     

@@ -62,3 +62,15 @@ Snippet code HTML:
 	#HTML
 
 	<a id="myElement" href="javascript;">Open Modal</a>
+
+
+LIGHTBOX SUPPORT
+----------------
+Automatic lightbox support:
+
+	 	#HTML
+	 	
+	 	<a href="bigpicture.jpg" rel="simplemodal[mygroup]" title="Picture 1">
+	 		<img alt="Example" src="thumbpicture.jpg" />
+	 	</a>
+	 	
