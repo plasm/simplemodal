@@ -246,7 +246,14 @@ var SimpleModal = new Class({
 			node = document.getElement('#simple-modal.simple-modal');		
 		
 		// Set Contents
-		var html = this._template(this.options.template, {"_TITLE_":options.title || "Untitled", "_CONTENTS_":options.contents || ""});
+		var template_vars = {"_TITLE_":options.title || "Untitled", "_CONTENTS_":options.contents || ""};
+		if (options.template_vars)
+		{
+			Object.each(options.template_vars, function(val, key){
+				template_vars[key] = val;
+			});
+		}
+		var html = this.options.template.substitute(template_vars);
 		
 		node.set("html", html);
 		
@@ -686,19 +693,8 @@ var SimpleModal = new Class({
            var fixEV = Browser.name != 'ie' ? "keydown" : "onkeydown";
            window.addEvent(fixEV, this._removeSM );
          }
-  		  }
-     },
-      
-    /**
-    * private method _template
-    * simple template by Thomas Fuchs
-    * @return
-    */
-    _template:function(s,d){
-     for(var p in d)
-       s=s.replace(new RegExp('{'+p+'}','g'), d[p]);
-     return s;
-    }
+  	   }
+     }
 });
 
 /**
