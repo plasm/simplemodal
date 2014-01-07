@@ -1,5 +1,5 @@
 {
-    "name": "simplemodal for mootools",
+    "name": "simplemodal",
     "version": "1.0",
     "main": [
         "./Source/simple-modal.js",
@@ -13,6 +13,8 @@
         "package.yml"
     ],
     "dependencies": {
-        "mootools": ">= 1.3.1"
+        "mootools": ">= 1.3.1",
+        "mootools-more": ">= 1.3.1.1"
+        
     }
 }
