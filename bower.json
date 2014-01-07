@@ -1,18 +1,18 @@
 {
-  "name": "simplemodal for mootools",
-  "version": "1.0",
-  "main": [
-    "./Source/simple-modal.js",
-    "./Source/assets/css/simplemodal.css",
-    "./Source/assets/images/loader.gif"
-  ],
-  "ignore": [
-    "Demos",
-    "README.md",
-    "logotipo.png",
-    "package.yml",
-  ],
-  "dependencies": {
-    "mootools": ">= 1.3.1"
-  }
+    "name": "simplemodal for mootools",
+    "version": "1.0",
+    "main": [
+        "./Source/simple-modal.js",
+        "./Source/assets/css/simplemodal.css",
+        "./Source/assets/images/loader.gif"
+    ],
+    "ignore": [
+        "Demos",
+        "README.md",
+        "logotipo.png",
+        "package.yml"
+    ],
+    "dependencies": {
+        "mootools": ">= 1.3.1"
+    }
 }
