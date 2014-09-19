@@ -1,5 +1,5 @@
 {
-    "name": "simplemodal",
+    "name": "simple-modal.js",
     "version": "1.0",
     "main": [
         "./Source/simple-modal.js",
