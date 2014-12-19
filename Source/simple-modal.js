@@ -67,6 +67,7 @@ var SimpleModal = new Class({
         draggable:     true,
         keyEsc:        true,
         overlayClick:  true,
+		alwaysImage:   true,
         closeButton:   true, // X close button
         hideHeader:    false, 
         hideFooter:    false,
@@ -515,7 +516,7 @@ var SimpleModal = new Class({
 		// Match image file
 		var re = new RegExp( /([^\/\\]+)\.(jpg|png|gif)$/i );
 			
-		if( param.url.match(re) ){
+		if( param.url.match(re) ||  this.options.alwaysImage){
 			
 			// Hide Header/Footer
 			$('simple-modal').addClass("hide-footer");
