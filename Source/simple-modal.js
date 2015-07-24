@@ -115,13 +115,14 @@ var SimpleModal = new Class({
         case "confirm":			
 			// Add button confirm
 			this.addButton(this.options.btn_ok, "btn primary btn-margin", function(){
-				try{ options.callback() } catch(err){};
 				this.hide();
+				try{ options.callback() } catch(err){};
 			})
           
 			// Add button cancel
-			this.addButton(this.options.btn_cancel, "btn secondary");
-			
+			if(this.options.btn_cancel!==false){
+				this.addButton(this.options.btn_cancel, "btn secondary");
+			}
 			// Rendering
 			var node = this._drawWindow(options);
 			
