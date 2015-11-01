@@ -74,3 +74,12 @@ Automatic lightbox support:
 	 		<img alt="Example" src="thumbpicture.jpg" />
 	 	</a>
 	 	
+Tradução em Português
+
+http://simplemodal.plasm.it
+---------------------------
+Modal - A simple modal window
+===========================================
+SIMPLES MODAL é um pequeno [ MooTools ] ( http://mootools.net/ ) plug-in para criar janelas modais .
+Ele pode ser usado para gerar mensagens de alerta ou confirmar com algumas linhas de código . Confirmar configuração envolve a utilização de retornos de chamada para ser aplicado a ação afirmativa ; ele pode trabalhar no modo assíncrono e recuperar o conteúdo de páginas externas ou obtenção do conteúdo em linha .
+SIMPLES MODAL não é uma mesa de luz , embora a possibilidade de esconder partes do seu layout pode torná-lo parcialmente similar.
